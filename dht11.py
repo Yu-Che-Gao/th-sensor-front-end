@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 import requests
-channel =4 //GPIO4
+channel =2
 data = []
 j = 0
 GPIO.setmode(GPIO.BCM)
@@ -54,7 +54,7 @@ if check == tmp:
   headers = {'User-Agent': 'Mozilla/5.0'}
   payload = {'temp':temperature,'humi':humidity}
   session = requests.Session()
-  session.post('https://th-sensor.herokuapp.com',headers=headers,data=payload)
+  session.post('https://th-sensor.herokuapp.com/insertTH',headers=headers,data=payload)
 else:
   print "wrong"
   print "temperature :", temperature, "*C, humidity :", humidity, "% check :", check, ", tmp :", tmp
