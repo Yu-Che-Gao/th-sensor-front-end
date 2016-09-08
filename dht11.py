@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
+import requests
 channel =4 //GPIO4
 data = []
 j = 0
@@ -49,6 +50,11 @@ for i in range(8):
 tmp = humidity + humidity_point + temperature + temperature_point
 if check == tmp:
   print "temperature :", temperature, "*C, humidity :", humidity, "%"
+
+  headers = {'User-Agent': 'Mozilla/5.0'}
+  payload = {'temp':temperature,'humi':humidity}
+  session = requests.Session()
+  session.post('https://th-sensor.herokuapp.com',headers=headers,data=payload)
 else:
   print "wrong"
   print "temperature :", temperature, "*C, humidity :", humidity, "% check :", check, ", tmp :", tmp
